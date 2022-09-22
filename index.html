@@ -80,7 +80,8 @@ function getNextTetromino(){
   }
   const name= tetrominoSequence.pop();
   const matrix= tetrominos[name];
-  const col = playfield[0].length/2-Math.ceil(matrix[0].length/2);
+  // const col = playfield[0].length / 2 - Math.ceil(matrix[0].length / 2);
+  const col = playfield.length/2-Math.ceil(matrix[0].length/2);
   const row =name==='I'?-1:-2;
   return {
     name, matrix,row,col
