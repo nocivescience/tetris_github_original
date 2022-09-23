@@ -44,6 +44,8 @@ function generateSequence() {
     const rand = getRandomInt(0, sequence.length - 1);
     const name = sequence.splice(rand, 1)[0];
     tetrominoSequence.push(name);
+    console.log(name)
+    console.log(sequence.splice(rand, 1)[0])
   }
 }
 
