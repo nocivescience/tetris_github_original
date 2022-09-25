@@ -110,7 +110,7 @@ function update(){
   requestAnimationFrame(update)
 }
 setInterval(()=>{
-  down++
+  down++;
 },1000)
 document.addEventListener('keydown',function(e){
   e.preventDefault()
@@ -123,6 +123,11 @@ document.addEventListener('keydown',function(e){
     right--
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     draw()
+  }
+  if(e.key==='s'){
+    setInterval(()=>{
+      down++;
+    },50)
   }
 })
 update()
