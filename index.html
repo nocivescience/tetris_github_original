@@ -26,6 +26,7 @@
   const ctx=canvas.getContext('2d');
   const columns=10;
   const rows=20;
+  const scala=32;
   const lista=['I','J','L','O','S','Z','T'];
   const rand=Math.floor(Math.random()*lista.length);
   const tetrominos = {
@@ -81,10 +82,10 @@ function grid(){
   for(let row=0;row<rows;row++){
       for(let col=0;col<columns;col++){
       ctx.fillStyle='white';
-      ctx.fillRect(col*32,row*32,32,32);
+      ctx.fillRect(col*scala,row*scala,scala,scala);
       ctx.lineWidth=1;
       ctx.strokeStyle='black';
-      ctx.strokeRect(col*32,row*32,32,32)
+      ctx.strokeRect(col*scala,row*scala,scala,scala)
     }
   }
 }
@@ -93,10 +94,10 @@ function pieces(){
     for(let j=0;j<tetrominos[lista[rand]][i].length;j++){
       if(tetrominos[lista[rand]][i][j]!==0){
         ctx.fillStyle=colors[lista[rand]];
-        ctx.fillRect(4*32+right*32+i*32,down*32+j*32,32,32)
+        ctx.fillRect(right*scala+i*scala,down*scala+j*scala,scala,scala)
         ctx.lineWidth=1;
         ctx.strokeWidth='white';
-        ctx.strokeRect(4*32+right*32+i*32,down*32+j*32,32,32);
+        ctx.strokeRect(right*scala+i*scala,down*scala+j*scala,scala,scala);
       }
     }
   }
@@ -111,54 +112,22 @@ function update(){
 }
 setInterval(()=>{
   down++;
-  for(let row=0;row<tetrominos[lista[rand]].length;row++){
-    for(let col=0;col<tetrominos[lista[rand]][row].length;col++){
-      let cell=tetrominos[lista[rand]][row][col]
-      if(cell!==0&&col+down+1>=20){
-        down=20-col-1
-      }
-    }
-  }
 },1000)
 document.addEventListener('keydown',function(e){
   e.preventDefault()
   if(e.key==='d'){
     right++
-    for(let row=0;row<tetrominos[lista[rand]].length;row++){
-      for(let col=0;col<tetrominos[lista[rand]][row].length;col++){
-        let cell=tetrominos[lista[rand]][row][col]
-          if(cell!==0&&right>=6-row-1){
-            right=6-row-1
-        }
-      }
-    }
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     draw()
   }
   if(e.key==='a'){
     right--
-    for(let row=0;row<tetrominos[lista[rand]].length;row++){
-      for(let col=0;col<tetrominos[lista[rand]][row].length;col++){
-        let cell=tetrominos[lista[rand]][row][col]
-          if(cell!==0&&right<=-5+col-1){
-            right=-5+col-1
-        }
-      }
-    }
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     draw()
   }
   if(e.key==='s'){
     setInterval(()=>{
-      down++
-      for(let row=0;row<tetrominos[lista[rand]].length;row++){
-        for(let col=0;col<tetrominos[lista[rand]][row].length+1;col++){
-          let cell=tetrominos[lista[rand]][row][col]
-          if(cell!==0&&col+down>=20){
-            down=20-col
-          }
-        }
-      }
+      down++;
     },50)
   }
 })
