@@ -112,6 +112,14 @@ function update(){
 }
 setInterval(()=>{
   down++;
+  for(let row=0; row<tetrominos[lista[rand]].length;row++){
+    for(let col=0; col<tetrominos[lista[rand]][row].length;col++){
+      cell=tetrominos[lista[rand]][row][col]
+      if(cell+down+tetrominos[lista[rand]][row].length-1>rows){
+        down=rows-tetrominos[lista[rand]][row].length
+      }
+    }
+  }
 },1000)
 document.addEventListener('keydown',function(e){
   e.preventDefault()
@@ -128,6 +136,14 @@ document.addEventListener('keydown',function(e){
   if(e.key==='s'){
     setInterval(()=>{
       down++;
+      for(let row=0; row<tetrominos[lista[rand]].length;row++){
+        for(let col=0; col<tetrominos[lista[rand]][row].length;col++){
+          cell=tetrominos[lista[rand]][row][col]
+          if(cell+down+tetrominos[lista[rand]][row].length-1>rows){
+            down=rows-tetrominos[lista[rand]][row].length
+          }
+        }
+      }
     },50)
   }
 })
