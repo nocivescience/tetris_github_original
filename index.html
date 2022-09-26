@@ -75,7 +75,7 @@ const colors = {
   'J': 'blue',
   'L': 'orange'
 };
-let right=0;
+let right=5;
 let down=0;
 let playField=[]
 function grid(){
@@ -106,12 +106,7 @@ function draw(){
   grid();
   pieces();
 }
-function update(){
-  draw();
-  requestAnimationFrame(update)
-}
-setInterval(()=>{
-  down++;
+function stoppedDown(){
   for(let row=0; row<tetrominos[lista[rand]].length;row++){
     for(let col=0; col<tetrominos[lista[rand]][row].length;col++){
       cell=tetrominos[lista[rand]][row][col]
@@ -120,30 +115,57 @@ setInterval(()=>{
       }
     }
   }
+}
+function stoppedRightSide(){
+  for(let row=0;row<tetrominos[lista[rand]].length;row++){
+    for(let col=0;col<tetrominos[lista[rand]][row].length;col++){
+      cell=tetrominos[lista[rand]][row][col]
+      if(cell!==0){
+        if(cell+right>=columns){
+          right=columns-tetrominos[lista[rand]][row][col]-1
+        }
+      }
+    }
+  }
+}
+function stoppedLeftSide(){
+  for(let row=0;row<tetrominos[lista[rand]].length;row++){
+    for(let col=0;col<tetrominos[lista[rand]][row].length;col++){
+      cell=tetrominos[lista[rand]][row][col]
+      if(cell!==0){
+        if(cell+right<=0){
+          right=-1+cell;
+        }
+      }
+    }
+  }
+}
+function update(){
+  draw();
+  requestAnimationFrame(update)
+}
+setInterval(()=>{
+  down++;
+  stoppedDown()
 },1000)
 document.addEventListener('keydown',function(e){
   e.preventDefault()
   if(e.key==='d'){
-    right++
+    right++;
+    stoppedRightSide();
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     draw()
   }
   if(e.key==='a'){
     right--
+    stoppedLeftSide();
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     draw()
   }
   if(e.key==='s'){
     setInterval(()=>{
       down++;
-      for(let row=0; row<tetrominos[lista[rand]].length;row++){
-        for(let col=0; col<tetrominos[lista[rand]][row].length;col++){
-          cell=tetrominos[lista[rand]][row][col]
-          if(cell+down+tetrominos[lista[rand]][row].length-1>rows){
-            down=rows-tetrominos[lista[rand]][row].length
-          }
-        }
-      }
+      stoppedDown();
     },50)
   }
 })
