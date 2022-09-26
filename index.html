@@ -134,7 +134,11 @@ function stoppedLeftSide(){
       cell=tetrominos[lista[rand]][row][col]
       if(cell!==0){
         if(cell+right<=0){
-          right=-1+cell;
+          if(lista[rand]=='I'){
+            right=-2+cell;
+          }else{
+            right=-1+cell;
+          }
         }
       }
     }
