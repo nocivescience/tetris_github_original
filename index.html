@@ -78,6 +78,13 @@ const colors = {
 let right=5;
 let down=0;
 let playField=[]
+function RandonPieces(){
+  let rand=Math.floor(Math.random()*lista.length)
+  return {
+    'piece':tetrominos[lista[rand]],
+    'color':colors[lista[rand]]
+  }
+}
 function grid(){
   for(let row=0;row<rows;row++){
       for(let col=0;col<columns;col++){
