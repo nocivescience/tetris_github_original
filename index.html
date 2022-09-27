@@ -146,10 +146,15 @@ function stoppedLeftSide(){
 }
 function update(){
   draw();
+  pieces();
   requestAnimationFrame(update)
 }
 setInterval(()=>{
   down++;
+  if(down===4){
+    pieces();
+    console.log('ricardo')
+  }
   stoppedDown()
 },1000)
 document.addEventListener('keydown',function(e){
