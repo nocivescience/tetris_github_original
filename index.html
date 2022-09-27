@@ -78,7 +78,7 @@ const colors = {
 let right=5;
 let down=0;
 let playField=[]
-function RandonPieces(){
+function randomPieces(){
   let rand=Math.floor(Math.random()*lista.length)
   return {
     'piece':tetrominos[lista[rand]],
@@ -97,10 +97,10 @@ function grid(){
   }
 }
 function pieces(){
-  for(let i=0; i<tetrominos[lista[rand]].length;i++){
-    for(let j=0;j<tetrominos[lista[rand]][i].length;j++){
-      if(tetrominos[lista[rand]][i][j]!==0){
-        ctx.fillStyle=colors[lista[rand]];
+  for(let i=0; i<randomPieces()['piece'].length;i++){
+    for(let j=0;j<randomPieces()['piece'][i].length;j++){
+      if(randomPieces()['piece'][i][j]!==0){
+        ctx.fillStyle=randomPieces()['color'];
         ctx.fillRect(right*scala+i*scala,down*scala+j*scala,scala,scala)
         ctx.lineWidth=1;
         ctx.strokeWidth='white';
@@ -114,31 +114,31 @@ function draw(){
   pieces();
 }
 function stoppedDown(){
-  for(let row=0; row<tetrominos[lista[rand]].length;row++){
-    for(let col=0; col<tetrominos[lista[rand]][row].length;col++){
-      cell=tetrominos[lista[rand]][row][col]
-      if(cell+down+tetrominos[lista[rand]][row].length-1>rows){
-        down=rows-tetrominos[lista[rand]][row].length
+  for(let row=0; row<randomPieces()['piece'].length;row++){
+    for(let col=0; col<randomPieces()['piece'][row].length;col++){
+      cell=randomPieces()['piece'][row][col]
+      if(cell+down+randomPieces()['piece'][row].length-1>rows){
+        down=rows-randomPieces()['piece'][row].length
       }
     }
   }
 }
 function stoppedRightSide(){
-  for(let row=0;row<tetrominos[lista[rand]].length;row++){
-    for(let col=0;col<tetrominos[lista[rand]][row].length;col++){
-      cell=tetrominos[lista[rand]][row][col]
+  for(let row=0;row<randomPieces()['piece'].length;row++){
+    for(let col=0;col<randomPieces()['piece'][row].length;col++){
+      cell=randomPieces()['piece'][row][col]
       if(cell!==0){
         if(cell+right>=columns){
-          right=columns-tetrominos[lista[rand]][row][col]-1
+          right=columns-randomPieces()['piece'][row][col]-1
         }
       }
     }
   }
 }
 function stoppedLeftSide(){
-  for(let row=0;row<tetrominos[lista[rand]].length;row++){
-    for(let col=0;col<tetrominos[lista[rand]][row].length;col++){
-      cell=tetrominos[lista[rand]][row][col]
+  for(let row=0;row<randomPieces()['piece'].length;row++){
+    for(let col=0;col<randomPieces()['piece'][row].length;col++){
+      cell=randomPieces()['piece'][row][col]
       if(cell!==0){
         if(cell+right<=0){
           if(lista[rand]=='I'){
